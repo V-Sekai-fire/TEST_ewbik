@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://dqbndfqdlyowh"
-path="res://.godot/imported/fire (rabbit).vrm-d67a3452740ee5f628dbde8395ddefab.scn"
+path="res://.godot/imported/SK_fire_rabbit_rev_06.vrm-325c88718369d13ea3624da575a20ccc.scn"
 
 [deps]
 
-source_file="res://fire (rabbit).vrm"
-dest_files=["res://.godot/imported/fire (rabbit).vrm-d67a3452740ee5f628dbde8395ddefab.scn"]
+source_file="res://SK_fire_rabbit_rev_06.vrm"
+dest_files=["res://.godot/imported/SK_fire_rabbit_rev_06.vrm-325c88718369d13ea3624da575a20ccc.scn"]
 
 [params]
 
