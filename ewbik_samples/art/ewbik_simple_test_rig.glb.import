@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://dl2l5ec4vmp06"
-path="res://.godot/imported/SK_fire_rabbit_rev_06.vrm-325c88718369d13ea3624da575a20ccc.scn"
+uid="uid://d35nd14euhmox"
+path="res://.godot/imported/ewbik_simple_test_rig.glb-95f640cc45440ba4d87d6eb65abb9aba.scn"
 
 [deps]
 
-source_file="res://SK_fire_rabbit_rev_06.vrm"
-dest_files=["res://.godot/imported/SK_fire_rabbit_rev_06.vrm-325c88718369d13ea3624da575a20ccc.scn"]
+source_file="res://ewbik_samples/art/ewbik_simple_test_rig.glb"
+dest_files=["res://.godot/imported/ewbik_simple_test_rig.glb-95f640cc45440ba4d87d6eb65abb9aba.scn"]
 
 [params]
 
@@ -44,7 +44,7 @@ meshes/ensure_tangents=true
 meshes/generate_lods=true
 meshes/create_shadow_meshes=true
 meshes/light_baking=1
-meshes/lightmap_texel_size=0.2
+meshes/lightmap_texel_size=0.1
 skins/use_named_skins=true
 animation/import=true
 animation/fps=30
