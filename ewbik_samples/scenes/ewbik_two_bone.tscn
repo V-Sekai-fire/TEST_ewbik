@@ -1,6 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://dldkxew4d73l5"]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="PackedScene" uid="uid://bjjiy2toj1hdi" path="res://ewbik_testing/art/ewbik_test_rig_2_bone.glb" id="1_556yf"]
+[ext_resource type="PackedScene" uid="uid://bjjiy2toj1hdi" path="res://ewbik_samples/art/ewbik_test_rig_2_bone.glb" id="1_556yf"]
 
 [sub_resource type="SkeletonModification3DEWBIK" id="SkeletonModification3DEWBIK_3rh2l"]
 execution_mode = 1
@@ -47,10 +47,10 @@ size = Vector3(0.25, 0.25, 0.125)
 [node name="ewbik_test_rig_2_bone" parent="." instance=ExtResource( "1_556yf" )]
 
 [node name="Skeleton3D" parent="ewbik_test_rig_2_bone/Simple_Test_Rig_Armature" index="0"]
-bones/1/position = Vector3(8.47033e-22, 0.6, 0)
-bones/1/rotation = Quaternion(-0.137114, 0.00363958, 0.194692, 0.971227)
-bones/2/position = Vector3(-2.70605e-05, 0.600225, -7.15256e-06)
-bones/2/rotation = Quaternion(0.137065, -0.00341512, -0.194722, 0.971228)
+bones/1/position = Vector3(1.1385e-17, 0.6, 0)
+bones/1/rotation = Quaternion(-0.00553885, 0.000298972, 0.705872, 0.708318)
+bones/2/position = Vector3(-1.37091e-06, 0.599973, -4.30271e-07)
+bones/2/rotation = Quaternion(0.00553871, -0.000298876, -0.705872, 0.708318)
 bones/2/scale = Vector3(1, 1, 1)
 modification_stack = SubResource( "SkeletonModificationStack3D_xr835" )
 
@@ -58,7 +58,7 @@ modification_stack = SubResource( "SkeletonModificationStack3D_xr835" )
 visible = false
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="ewbik_test_rig_2_bone/Simple_Test_Rig_Armature/Skeleton3D" index="1"]
-transform = Transform3D(1, 0.000119641, 0.000408754, -0.000119714, 1, 0.00018242, -0.000408728, -0.000182509, 1, -0.227617, 1.13214, -0.159017)
+transform = Transform3D(1, -2.21698e-08, -2.32831e-09, -2.4258e-08, 1, 9.31323e-10, 4.19095e-09, -1.86265e-09, 1, -0.599953, 0.602056, -0.00445467)
 bone_name = "Bone_03"
 bone_idx = 2
 
@@ -68,7 +68,7 @@ mesh = SubResource( "BoxMesh_cy8x8" )
 [node name="Node3D" type="Node3D" parent="."]
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.999998, 0.0211484, 0.602254, -0.00488331)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.999998, -0.65768, 0.602254, -0.00488331)
 top_level = true
 bone_name = "Bone_03"
 bone_idx = 2

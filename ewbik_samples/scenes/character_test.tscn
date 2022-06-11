@@ -1,7 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://csmj065g8w0ko"]
+[gd_scene load_steps=4 format=3]
 
-[ext_resource type="PackedScene" uid="uid://dl2l5ec4vmp06" path="res://ewbik_testing/art/SK_fire_rabbit_rev_06.vrm" id="1_m6oc7"]
-[ext_resource type="SkeletonModification3DEWBIK" uid="uid://c5y3utvxivopi" path="res://EWBIK_fire_rabbit.tres" id="2_1jn6f"]
+[ext_resource type="PackedScene" uid="uid://dl2l5ec4vmp06" path="res://ewbik_samples/art/SK_fire_rabbit_rev_06.vrm" id="1_m6oc7"]
+[ext_resource type="SkeletonModification3DEWBIK" path="res://ewbik_samples/ewbik/EWBIK_fire_rabbit.tres" id="2_1jn6f"]
 
 [sub_resource type="SkeletonModificationStack3D" id="SkeletonModificationStack3D_2cxvt"]
 modification_count = 1

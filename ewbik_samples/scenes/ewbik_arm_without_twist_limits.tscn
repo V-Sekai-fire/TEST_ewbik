@@ -1,6 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://rftvwgndtv5o"]
+[gd_scene load_steps=4 format=3]
 
-[ext_resource type="PackedScene" uid="uid://d35nd14euhmox" path="res://ewbik_testing/art/ewbik_simple_test_rig.glb" id="1_mu4f6"]
+[ext_resource type="PackedScene" uid="uid://d35nd14euhmox" path="res://ewbik_samples/art/ewbik_simple_test_rig.glb" id="1_mu4f6"]
 
 [sub_resource type="SkeletonModification3DEWBIK" id="SkeletonModification3DEWBIK_yh8j1"]
 max_ik_iterations = 10.0
