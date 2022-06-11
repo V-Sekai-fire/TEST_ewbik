@@ -3,19 +3,19 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://daav1dqydvgob"
-path="res://.godot/imported/Fox.glb-b572ef9399f0b9efcd3cbe0eb60eeed0.scn"
+uid="uid://dirfsihyatygm"
+path="res://.godot/imported/Godot_CCDIK_Arm.glb-1cc7fbcfd9a9b7b41af6eab8a1b2de15.scn"
 
 [deps]
 
-source_file="res://ewbik_samples/art/Fox.glb"
-dest_files=["res://.godot/imported/Fox.glb-b572ef9399f0b9efcd3cbe0eb60eeed0.scn"]
+source_file="res://ewbik_samples/art/Godot_CCDIK_Arm.glb"
+dest_files=["res://.godot/imported/Godot_CCDIK_Arm.glb-1cc7fbcfd9a9b7b41af6eab8a1b2de15.scn"]
 
 [params]
 
 nodes/root_type="Node3D"
 nodes/root_name="Scene Root"
-nodes/scene_scale=0.01
+nodes/scene_scale=0.1
 nodes/root_scale=1.0
 nodes/generate_physics=false
 nodes/generate_navmesh=0
@@ -45,7 +45,7 @@ meshes/ensure_tangents=true
 meshes/generate_lods=true
 meshes/create_shadow_meshes=true
 meshes/light_baking=1
-meshes/lightmap_texel_size=0.1
+meshes/lightmap_texel_size=0.2
 skins/use_named_skins=true
 animation/import=true
 animation/fps=30
