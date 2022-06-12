@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://dl2l5ec4vmp06"
-path="res://.godot/imported/SK_fire_rabbit_rev_06.vrm-8fea6f7a6090a94c127ddd204580ef59.scn"
+uid="uid://dyq3gp5ilklbv"
+path="res://.godot/imported/v_sekai_adult-female.vrm-224922238291803529a04922b2914c5c.scn"
 
 [deps]
 
-source_file="res://ewbik_samples/art/SK_fire_rabbit_rev_06.vrm"
-dest_files=["res://.godot/imported/SK_fire_rabbit_rev_06.vrm-8fea6f7a6090a94c127ddd204580ef59.scn"]
+source_file="res://ewbik_samples/art/v_sekai_adult-female.vrm"
+dest_files=["res://.godot/imported/v_sekai_adult-female.vrm-224922238291803529a04922b2914c5c.scn"]
 
 [params]
 

@@ -12,12 +12,14 @@ func _has_gizmo(for_node_3d : Node3D) -> bool:
 	return false
 
 func _redraw(editor_gizmo_3d : EditorNode3DGizmo) -> void:
-	var skeleton : Skeleton3D = vrm_top_level.get_node(vrm_top_level.vrm_skeleton)
+	var skeleton : Skeleton3D = vrm_top_level.get_node_or_null(vrm_top_level.vrm_skeleton)
 	if not skeleton:
 		return
 	var stack : SkeletonModificationStack3D = skeleton.get_modification_stack()
 	if not stack:
-		return
+		stack = SkeletonModificationStack3D.new()
+		stack.add_modification(SkeletonModification3DEWBIK.new())
+		skeleton.set_modification_stack(stack)
 	var vrm_human_mapping : Dictionary = vrm_top_level.vrm_meta.humanoid_bone_mapping
 	var bone_vrm_mapping : Dictionary
 	for key in vrm_human_mapping.keys():
@@ -26,13 +28,35 @@ func _redraw(editor_gizmo_3d : EditorNode3DGizmo) -> void:
 		var ewbik : SkeletonModification3DEWBIK = stack.get_modification(i)
 		if ewbik.get_constraint_count():
 			continue
+		var pins : Dictionary = {
+			"hips": {}, 
+			"leftFoot": {}, 
+			"rightFoot": {}, 
+			"head": {}, 
+			"chest": {}, 
+			"leftHand":{}, 
+			"rightHand": {}
+		}
+		ewbik.set_pin_count(0)
+		for key in pins.keys():
+			var node_3d : Node3D = Node3D.new()
+			skeleton.add_child(node_3d, true)
+			var node_path : NodePath = "../../" + str(key)
+			var bone_name : StringName = vrm_human_mapping[str(key)]
+			node_3d.name = bone_name
+			var bone_id : int = skeleton.find_bone(bone_name)
+			node_3d.transform = skeleton.get_bone_global_pose(bone_id)
+			ewbik.add_pin(bone_name, node_path, true)
 		ewbik.constraint_count = 0
-		ewbik.constraint_count = skeleton.get_bone_count()
+		ewbik.constraint_count = bone_vrm_mapping.size()
 		for count_i in range(ewbik.constraint_count):
-			var bone_name : String = skeleton.get_bone_name(count_i)
+			var bone_name : String = bone_vrm_mapping.keys()[count_i]
 			ewbik.set_constraint_name(count_i, bone_name)
 			ewbik.set_kusudama_twist_from(count_i, 0.0)
 			ewbik.set_kusudama_twist_to(count_i, TAU)
-			ewbik.set_kusudama_limit_cone_count(count_i, 0)
+			ewbik.set_kusudama_limit_cone_count(count_i, 1)
 			ewbik.set_kusudama_limit_cone_center(count_i, 0, Vector3(0, 1, 0))
-			ewbik.set_kusudama_limit_cone_radius(count_i, 0, deg2rad(45))
+			ewbik.set_kusudama_limit_cone_radius(count_i, 0, deg2rad(90))
+		stack.enable_all_modifications(true)
+		
+ 
