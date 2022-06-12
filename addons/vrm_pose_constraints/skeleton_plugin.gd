@@ -72,47 +72,55 @@ func _redraw(editor_gizmo_3d : EditorNode3DGizmo) -> void:
 			index = index + 1
 		ewbik.constraint_count = 0
 		for count_i in range(vrm_human_mapping.keys().size()):
-			var bone_name = vrm_human_mapping[vrm_human_mapping.keys()[count_i]]
-			ewbik.set_constraint_name(count_i, bone_name)
+			var vrm_bone_name = vrm_human_mapping.keys()[count_i]
+			var bone_name = vrm_human_mapping[vrm_bone_name]
+			var constraint_i = ewbik.constraint_count
 			# Female age 9 - 19 https://pubmed.ncbi.nlm.nih.gov/32644411/
 			if bone_name in [
 				vrm_human_mapping["hips"],]:
-				ewbik.constraint_count = ewbik.constraint_count + 1
-				ewbik.set_kusudama_limit_cone_count(count_i, 0)
+				# Hips are unconstraint
 				continue
-			elif bone_name in [
+			if bone_name in [
 				vrm_human_mapping["spine"], 
 				vrm_human_mapping["chest"],
-				vrm_human_mapping["upperChest"],]:
-				ewbik.constraint_count = ewbik.constraint_count + 1
-				ewbik.set_kusudama_limit_cone_count(count_i, 0)
-				ewbik.set_kusudama_twist_to(count_i, 0)
-				continue					
-			elif bone_name in [
+				vrm_human_mapping["upperChest"],
 				vrm_human_mapping["neck"],
-				vrm_human_mapping["head"],
+				]:
+				ewbik.constraint_count = ewbik.constraint_count + 1
+				ewbik.set_constraint_name(constraint_i, vrm_bone_name)
+				ewbik.set_kusudama_limit_cone_count(constraint_i, 0)
+				ewbik.set_kusudama_twist_to(constraint_i, deg2rad(1))
+				continue
+			if bone_name in [
 				vrm_human_mapping["leftShoulder"],
 				vrm_human_mapping["rightShoulder"],
-				vrm_human_mapping["leftLowerArm"],
-				vrm_human_mapping["rightLowerArm"],
-				vrm_human_mapping["leftHand"],
-				vrm_human_mapping["rightHand"],
-				vrm_human_mapping["leftLowerArm"],
-				vrm_human_mapping["rightLowerArm"],
-				vrm_human_mapping["leftToes"],
-				vrm_human_mapping["rightToes"],
-				vrm_human_mapping["leftHand"],
-				vrm_human_mapping["rightHand"],
-				vrm_human_mapping["rightFoot"], 
-				vrm_human_mapping["leftFoot"],
-				vrm_human_mapping["leftUpperArm"],
-				vrm_human_mapping["rightUpperArm"],
-				vrm_human_mapping["rightUpperLeg"],
-				vrm_human_mapping["leftUpperLeg"],
-				vrm_human_mapping["rightLowerLeg"],
-				vrm_human_mapping["leftLowerLeg"],
-			]:
-				pass
+				]:
+				ewbik.constraint_count = ewbik.constraint_count + 1
+				ewbik.set_constraint_name(constraint_i, vrm_bone_name)
+				ewbik.set_kusudama_twist_to(constraint_i, deg2rad(1))
+				continue
+#			vrm_human_mapping["neck"],
+#			vrm_human_mapping["head"],
+#			vrm_human_mapping[""],
+#			vrm_human_mapping["rightShoulder"],
+#			vrm_human_mapping["leftLowerArm"],
+#			vrm_human_mapping["rightLowerArm"],
+#			vrm_human_mapping["leftHand"],
+#			vrm_human_mapping["rightHand"],
+#			vrm_human_mapping["leftLowerArm"],
+#			vrm_human_mapping["rightLowerArm"],
+#			vrm_human_mapping["leftToes"],
+#			vrm_human_mapping["rightToes"],
+#			vrm_human_mapping["leftHand"],
+#			vrm_human_mapping["rightHand"],
+#			vrm_human_mapping["rightFoot"], 
+#			vrm_human_mapping["leftFoot"],
+#			vrm_human_mapping["leftUpperArm"],
+#			vrm_human_mapping["rightUpperArm"],
+#			vrm_human_mapping["rightUpperLeg"],
+#			vrm_human_mapping["leftUpperLeg"],
+#			vrm_human_mapping["rightLowerLeg"],
+#			vrm_human_mapping["leftLowerLeg"],
 #			ewbik.set_kusudama_twist_from(count_i, 0)
 #			ewbik.set_kusudama_twist_to(count_i, 360)
 #			ewbik.set_kusudama_limit_cone_count(count_i, 1)
