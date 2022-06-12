@@ -33,3 +33,4 @@ enabled=PackedStringArray("res://addons/force_bone_forward/plugin.cfg", "res://a
 driver/threads/thread_model=2
 scaling_3d/mode=1
 scaling_3d/scale=2.0
+anti_aliasing/quality/msaa=3
