@@ -34,3 +34,5 @@ func _redraw(editor_gizmo_3d : EditorNode3DGizmo) -> void:
 			ewbik.set_kusudama_twist_from(count_i, 0.0)
 			ewbik.set_kusudama_twist_to(count_i, TAU)
 			ewbik.set_kusudama_limit_cone_count(count_i, 0)
+			ewbik.set_kusudama_limit_cone_center(count_i, 0, Vector3(0, 1, 0))
+			ewbik.set_kusudama_limit_cone_radius(count_i, 0, deg2rad(45))
