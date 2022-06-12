@@ -111,7 +111,7 @@ func _redraw(editor_gizmo_3d : EditorNode3DGizmo) -> void:
 				vrm_human_mapping["rightFoot"], 
 				vrm_human_mapping["leftFoot"],
 			]:
-				ewbik.set_kusudama_twist_to(count_i, rad2deg(0))
+				ewbik.set_kusudama_twist_to(count_i, rad2deg(5))
 			elif bone_name in [
 				vrm_human_mapping["leftUpperArm"],
 				vrm_human_mapping["rightUpperArm"],
