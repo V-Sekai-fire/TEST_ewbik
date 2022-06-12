@@ -26,7 +26,7 @@ func _redraw(editor_gizmo_3d : EditorNode3DGizmo) -> void:
 		bone_vrm_mapping[vrm_human_mapping[key]] = key
 	for i in range(stack.modification_count):
 		var ewbik : SkeletonModification3DEWBIK = stack.get_modification(i)
-		ewbik.default_damp = deg2rad(1)
+		ewbik.default_damp = deg2rad(0.1)
 		if ewbik.get_constraint_count():
 			continue
 		# https://github.com/vrm-c/vrm-specification/blob/master/specification/0.0/schema/vrm.humanoid.bone.schema.json
