@@ -60,8 +60,8 @@ func _redraw(editor_gizmo_3d : EditorNode3DGizmo) -> void:
 		}
 		ewbik.set_pin_count(0)
 		var index = 0
-		var minimum_twist = deg2rad(0)
-		var minimum_twist_diff = deg2rad(1)
+		var minimum_twist = deg2rad(-0.5)
+		var minimum_twist_diff = deg2rad(0.5)
 		var maximum_twist = deg2rad(360)
 		for key in pins.keys():
 			var node_3d : Node3D = Node3D.new()
@@ -138,6 +138,13 @@ func _redraw(editor_gizmo_3d : EditorNode3DGizmo) -> void:
 			if bone_name in [
 				vrm_human_mapping["leftShoulder"],
 				vrm_human_mapping["rightShoulder"],
+				]:
+				ewbik.constraint_count = ewbik.constraint_count + 1
+				ewbik.set_constraint_name(constraint_i, bone_name)
+				ewbik.set_kusudama_twist_from(constraint_i, deg2rad(-18))
+				ewbik.set_kusudama_twist_to(constraint_i, deg2rad(30))
+				continue
+			if bone_name in [
 				vrm_human_mapping["leftUpperArm"],
 				vrm_human_mapping["rightUpperArm"],
 				]:
