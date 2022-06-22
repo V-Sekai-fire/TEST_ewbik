@@ -74,7 +74,7 @@ func _redraw(editor_gizmo_3d : EditorNode3DGizmo) -> void:
 			ewbik.add_pin(bone_name, node_path, true)
 			if key == "hips":
 				ewbik.root_bone = bone_name
-#				ewbik.set("pins/%s/depth_falloff" % index, 0)
+				ewbik.set_pin_depth_falloff(index, 0)
 			index = index + 1
 		ewbik.constraint_count = 0
 		for count_i in range(vrm_human_mapping.keys().size()):
