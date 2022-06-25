@@ -101,7 +101,7 @@ func _redraw(editor_gizmo_3d : EditorNode3DGizmo) -> void:
 			# Female age 9 - 19 https://pubmed.ncbi.nlm.nih.gov/32644411/
 			if vrm_bone_name in ["hips"]:
 				ewbik.set_kusudama_twist_from(constraint_i, deg2rad(0.5))
-				ewbik.set_kusudama_twist_to(constraint_i, deg2rad(-s0.5))
+				ewbik.set_kusudama_twist_to(constraint_i, deg2rad(-0.5))
 			elif vrm_bone_name in ["spine"]:
 				ewbik.set_kusudama_twist_from(constraint_i, deg2rad(60))
 				ewbik.set_kusudama_twist_to(constraint_i, deg2rad(-60))
