@@ -15,7 +15,12 @@ func _has_gizmo(for_node_3d : Node3D) -> bool:
 func _lock_rotation(ewbik, constraint_i):
 	ewbik.set_kusudama_limit_cone_count(constraint_i, 1)
 	ewbik.set_kusudama_limit_cone_center(constraint_i, 0, Vector3(0, 1, 0))
-	ewbik.set_kusudama_limit_cone_radius(constraint_i, 0, 0.1)
+	ewbik.set_kusudama_limit_cone_radius(constraint_i, 0, 0.3)
+
+func _full_rotation(ewbik, constraint_i):
+	ewbik.set_kusudama_limit_cone_count(constraint_i, 1)
+	ewbik.set_kusudama_limit_cone_center(constraint_i, 0, Vector3(0, 1, 0))
+	ewbik.set_kusudama_limit_cone_radius(constraint_i, 0, TAU)
 
 func _redraw(editor_gizmo_3d : EditorNode3DGizmo) -> void:
 	var skeleton : Skeleton3D = vrm_top_level.get_node_or_null(vrm_top_level.vrm_skeleton)
@@ -92,10 +97,11 @@ func _redraw(editor_gizmo_3d : EditorNode3DGizmo) -> void:
 			var constraint_i = ewbik.constraint_count
 			ewbik.constraint_count = ewbik.constraint_count + 1
 			ewbik.set_constraint_name(constraint_i, bone_name)
+			ewbik.set_kusudama_limit_cone_count(constraint_i, 0)
 			# Female age 9 - 19 https://pubmed.ncbi.nlm.nih.gov/32644411/
 			if vrm_bone_name in ["hips"]:
 				ewbik.set_kusudama_twist_from(constraint_i, deg2rad(0.5))
-				ewbik.set_kusudama_twist_to(constraint_i, deg2rad(-0.5))
+				ewbik.set_kusudama_twist_to(constraint_i, deg2rad(-s0.5))
 			elif vrm_bone_name in ["spine"]:
 				ewbik.set_kusudama_twist_from(constraint_i, deg2rad(60))
 				ewbik.set_kusudama_twist_to(constraint_i, deg2rad(-60))
@@ -130,7 +136,8 @@ func _redraw(editor_gizmo_3d : EditorNode3DGizmo) -> void:
 				ewbik.set_kusudama_twist_from(constraint_i, deg2rad(40))
 				ewbik.set_kusudama_twist_to(constraint_i, deg2rad(-40))
 			else:
-				pass
+				ewbik.set_kusudama_twist_from(constraint_i, deg2rad(0.5))
+				ewbik.set_kusudama_twist_to(constraint_i, deg2rad(-0.5))
 
 		stack.enable_all_modifications(true)
 		stack.enabled = true
