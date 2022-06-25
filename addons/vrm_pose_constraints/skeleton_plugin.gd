@@ -5,11 +5,13 @@ const vrm_top_level_const : Script = preload("res://addons/vrm/vrm_toplevel.gd")
 
 var vrm_top_level : Node3D = null 
 
+
 func _has_gizmo(for_node_3d : Node3D) -> bool:
 	if for_node_3d.get_script() == vrm_top_level_const:
 		vrm_top_level = for_node_3d
 		return true
 	return false
+
 
 func _redraw(editor_gizmo_3d : EditorNode3DGizmo) -> void:
 	var skeleton : Skeleton3D = vrm_top_level.get_node_or_null(vrm_top_level.vrm_skeleton)
@@ -66,7 +68,7 @@ func _redraw(editor_gizmo_3d : EditorNode3DGizmo) -> void:
 		for key in pins.keys():
 			var node_3d : Node3D = Node3D.new()
 			skeleton.add_child(node_3d, true)
-			var node_path : NodePath = "../../" + str(key)
+			var node_path : NodePath = str(skeleton.get_path_to(skeleton.owner)) + "/../" + str(key)
 			var bone_name : StringName = vrm_human_mapping[str(key)]
 			node_3d.name = bone_name
 			var bone_id : int = skeleton.find_bone(bone_name)
