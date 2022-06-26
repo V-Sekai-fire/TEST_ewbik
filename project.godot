@@ -26,7 +26,7 @@ config/icon="res://icon.png"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/vrm/plugin.cfg", "res://addons/force_bone_forward/plugin.cfg", "res://addons/Godot-MToon-Shader/plugin.cfg")
+enabled=PackedStringArray("res://addons/vrm/plugin.cfg", "res://addons/force_bone_forward/plugin.cfg", "res://addons/Godot-MToon-Shader/plugin.cfg", "res://addons/vrm_pose_constraints/plugin.cfg")
 
 [rendering]
 
