@@ -1,16 +1,6 @@
 @tool
-extends EditorNode3DGizmoPlugin
+extends EditorScript
 
-const vrm_top_level_const : Script = preload("res://addons/vrm/vrm_toplevel.gd")
-
-var vrm_top_level : Node3D = null 
-
-
-func _has_gizmo(for_node_3d : Node3D) -> bool:
-	if for_node_3d.get_script() == vrm_top_level_const:
-		vrm_top_level = for_node_3d
-		return true
-	return false
 
 func _lock_rotation(ewbik, constraint_i):
 	ewbik.set_kusudama_limit_cone_count(constraint_i, 1)
@@ -22,22 +12,42 @@ func _full_rotation(ewbik, constraint_i):
 	ewbik.set_kusudama_limit_cone_center(constraint_i, 0, Vector3(0, 1, 0))
 	ewbik.set_kusudama_limit_cone_radius(constraint_i, 0, TAU)
 
-func _redraw(editor_gizmo_3d : EditorNode3DGizmo) -> void:
-	var skeleton : Skeleton3D = vrm_top_level.get_node_or_null(vrm_top_level.vrm_skeleton)
-	if not skeleton:
-		return
-	var stack : SkeletonModificationStack3D = skeleton.get_modification_stack()
-	if not stack:
-		stack = SkeletonModificationStack3D.new()
-		stack.add_modification(SkeletonModification3DEWBIK.new())
-		stack.enabled = true
-		skeleton.set_modification_stack(stack)
-	var vrm_human_mapping : Dictionary = vrm_top_level.vrm_meta.humanoid_bone_mapping
+func _run():
+	var root : Node3D = get_editor_interface().get_edited_scene_root()
+	var queue : Array
+	queue.push_back(root)
+	var string_builder : Array
+	var vrm_top_level : Node3D
+	var skeleton : Skeleton3D
+	var ewbik : EWBIK = null
+	while not queue.is_empty():
+		var front = queue.front()
+		var node : Node = front
+		if node is Skeleton3D:
+			skeleton = node
+		if node.script and node.script.resource_path == "res://addons/vrm/vrm_toplevel.gd":
+			vrm_top_level = node
+		if node is EWBIK:
+			ewbik = node
+		var child_count : int = node.get_child_count()
+		for i in child_count:
+			queue.push_back(node.get_child(i))
+		queue.pop_front()
+	if ewbik != null:
+		ewbik.queue_free()
+	ewbik = EWBIK.new()
+	skeleton.add_child(ewbik, true)
+	ewbik.owner = skeleton.owner
+	ewbik.name = "EWBIK"
+	ewbik.skeleton = ewbik.get_path_to(skeleton)
+	_generate_ewbik(vrm_top_level, skeleton, ewbik)
+
+func _generate_ewbik(vrm_top_level : Node3D, skeleton : Skeleton3D, ewbik : EWBIK):
+	var vrm_meta = vrm_top_level.get("vrm_meta")
+	var vrm_human_mapping : Dictionary = vrm_meta.get("humanoid_bone_mapping")
 	var bone_vrm_mapping : Dictionary
 	for key in vrm_human_mapping.keys():
 		bone_vrm_mapping[vrm_human_mapping[key]] = key
-	for i in range(stack.modification_count):
-		var ewbik : SkeletonModification3DEWBIK = stack.get_modification(i)
 		ewbik.max_ik_iterations = 30
 		ewbik.default_damp = deg2rad(1)
 		ewbik.budget_millisecond = 2
@@ -72,20 +82,22 @@ func _redraw(editor_gizmo_3d : EditorNode3DGizmo) -> void:
 			"rightHand": {}
 		}
 		ewbik.set_pin_count(0)
-		var index = 0
+		var index : int = 0
 		var minimum_twist = deg2rad(-0.5)
 		var minimum_twist_diff = deg2rad(0.5)
 		var maximum_twist = deg2rad(360)
-		for key in pins.keys():
+		var pin_size : int = pins.keys().size()
+		for pin_i in pin_size:
 			var node_3d : Node3D = Node3D.new()
 			skeleton.add_child(node_3d, true)
-			var node_path : NodePath = str(skeleton.get_path_to(skeleton.owner)) + "/../" + str(key)
-			var bone_name : StringName = vrm_human_mapping[str(key)]
+			var pin_key = pins.keys()[pin_i]
+			var node_path : NodePath = "../../../" + str(pin_key)
+			var bone_name : StringName = vrm_human_mapping[pin_key]
 			node_3d.name = bone_name
 			var bone_id : int = skeleton.find_bone(bone_name)
 			node_3d.transform = skeleton.get_bone_global_pose(bone_id)
 			ewbik.add_pin(bone_name, node_path, true)
-			if key == "hips":
+			if pin_key == "hips":
 				ewbik.set_pin_depth_falloff(index, 0)
 			index = index + 1
 		ewbik.constraint_count = 0
@@ -139,6 +151,3 @@ func _redraw(editor_gizmo_3d : EditorNode3DGizmo) -> void:
 			else:
 				ewbik.set_kusudama_twist_from(constraint_i, deg2rad(-0.5))
 				ewbik.set_kusudama_twist_to(constraint_i, deg2rad(0.5))
-
-		stack.enable_all_modifications(true)
-		stack.enabled = true
