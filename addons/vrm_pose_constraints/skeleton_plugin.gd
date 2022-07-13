@@ -162,8 +162,7 @@ func _generate_ewbik(vrm_top_level : Node3D, skeleton : Skeleton3D, ewbik : EWBI
 			var bone_id : int = skeleton.find_bone(bone_name)
 			node_3d.transform = skeleton.get_bone_global_pose(bone_id)
 			ewbik.add_pin(bone_name, node_path, true)
-			if pin_key == "hips":
-				ewbik.set_pin_depth_falloff(index, 0)
+			ewbik.set_pin_depth_falloff(index, 0)
 			index = index + 1
 		ewbik.constraint_count = 0
 		for count_i in skeleton.get_bone_count():
