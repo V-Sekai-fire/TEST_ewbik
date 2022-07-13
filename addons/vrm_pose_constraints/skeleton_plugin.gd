@@ -108,16 +108,16 @@ func _run():
 	var profile : SkeletonProfileHumanoid = ewbik.skeleton_profile
 	var humanoid_bone_mapping : Dictionary = vrm_top_level.vrm_meta.humanoid_bone_mapping
 	for b in profile.bone_size:
-		var godot_name = profile.get_bone_name(b)
+		var profile_name = profile.get_bone_name(b)
 		var vrm_name : String
-		if godot_to_vrm.has(godot_name):
-			vrm_name = godot_to_vrm[godot_name]
+		if godot_to_vrm.has(profile_name):
+			vrm_name = godot_to_vrm[profile_name]
 		var bone_index : int = -1
 		var bone_name : String
 		if humanoid_bone_mapping.has(vrm_name):
 			bone_name = humanoid_bone_mapping[vrm_name]
 			bone_index = skeleton.find_bone(bone_name)
-		print({"godot_name": godot_name, 
+		print({"profile_name": profile_name, 
 			"vrm_name": vrm_name, "profile_index": b, "bone_index": bone_index, "bone_name": bone_name})
 func _generate_ewbik(vrm_top_level : Node3D, skeleton : Skeleton3D, ewbik : EWBIK):
 	var vrm_meta = vrm_top_level.get("vrm_meta")
@@ -129,24 +129,7 @@ func _generate_ewbik(vrm_top_level : Node3D, skeleton : Skeleton3D, ewbik : EWBI
 		ewbik.default_damp = deg2rad(1)
 		ewbik.budget_millisecond = 2
 		if ewbik.get_constraint_count():
-			continue
-		# https://github.com/vrm-c/vrm-specification/blob/master/specification/0.0/schema/vrm.humanoid.bone.schema.json
-		var humanoid_bone : Array = [
-			"hips",
-			"leftUpperLeg","rightUpperLeg","leftLowerLeg","rightLowerLeg","leftFoot","rightFoot",
-			"spine","chest","neck","head","leftShoulder","rightShoulder","leftUpperArm","rightUpperArm",
-			"leftLowerArm","rightLowerArm","leftHand","rightHand","leftToes","rightToes","leftEye","rightEye","jaw",
-			# Fingers
-			"leftThumbProximal","leftThumbIntermediate","leftThumbDistal",
-			"leftIndexProximal","leftIndexIntermediate","leftIndexDistal",
-			"leftMiddleProximal","leftMiddleIntermediate","leftMiddleDistal",
-			"leftRingProximal","leftRingIntermediate","leftRingDistal",
-			"leftLittleProximal","leftLittleIntermediate","leftLittleDistal",
-			"rightThumbProximal","rightThumbIntermediate","rightThumbDistal",
-			"rightIndexProximal","rightIndexIntermediate","rightIndexDistal",
-			"rightMiddleProximal","rightMiddleIntermediate","rightMiddleDistal",
-			"rightRingProximal","rightRingIntermediate","rightRingDistal",
-			"rightLittleProximal","rightLittleIntermediate","rightLittleDistal", "upperChest"]
+			continue		
 
 		var pins : Dictionary = {
 			"leftLowerLeg":{}, 
