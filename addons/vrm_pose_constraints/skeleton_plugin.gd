@@ -101,25 +101,29 @@ func _run():
 	ewbik.owner = skeleton.owner
 	ewbik.name = "EWBIK"
 	ewbik.skeleton = ewbik.get_path_to(skeleton)
-	_generate_ewbik(vrm_top_level, skeleton, ewbik)
 	var godot_to_vrm : Dictionary
 	for vrm_name in vrm_to_godot.keys():
 		godot_to_vrm[vrm_to_godot[vrm_name]] = vrm_name 
 	var profile : SkeletonProfileHumanoid = ewbik.skeleton_profile
 	var humanoid_bone_mapping : Dictionary = vrm_top_level.vrm_meta.humanoid_bone_mapping
+	var vrm_profile : Dictionary
+	var humanoid_profile : Dictionary
 	for b in profile.bone_size:
 		var profile_name = profile.get_bone_name(b)
-		var vrm_name : String
+		var vrm_name : StringName
 		if godot_to_vrm.has(profile_name):
 			vrm_name = godot_to_vrm[profile_name]
 		var bone_index : int = -1
-		var bone_name : String
+		var bone_name : StringName
 		if humanoid_bone_mapping.has(vrm_name):
 			bone_name = humanoid_bone_mapping[vrm_name]
 			bone_index = skeleton.find_bone(bone_name)
-		print({"profile_name": profile_name, 
-			"vrm_name": vrm_name, "profile_index": b, "bone_index": bone_index, "bone_name": bone_name})
-func _generate_ewbik(vrm_top_level : Node3D, skeleton : Skeleton3D, ewbik : EWBIK):
+		vrm_profile[vrm_name] = {"profile_name": profile_name, "profile_index": b, "bone_index": bone_index, "bone_name": bone_name}
+		humanoid_profile[profile_name] = {"vrm_name": vrm_name, "profile_index": b, "bone_index": bone_index, "bone_name": bone_name}
+	_generate_ewbik(vrm_top_level, skeleton, ewbik, vrm_profile, humanoid_profile)
+	
+
+func _generate_ewbik(vrm_top_level : Node3D, skeleton : Skeleton3D, ewbik : EWBIK, vrm_profile : Dictionary, humanoid_profile : Dictionary) -> void:
 	var vrm_meta = vrm_top_level.get("vrm_meta")
 	var vrm_human_mapping : Dictionary = vrm_meta.get("humanoid_bone_mapping")
 	var bone_vrm_mapping : Dictionary
@@ -130,28 +134,29 @@ func _generate_ewbik(vrm_top_level : Node3D, skeleton : Skeleton3D, ewbik : EWBI
 		ewbik.budget_millisecond = 2
 		if ewbik.get_constraint_count():
 			continue		
-
-		var pins : Dictionary = {
-			"leftLowerLeg":{}, 
-			"leftFoot": {}, 
-			"rightLowerLeg":{}, 
-			"rightFoot": {}, 
-			"head": {}, 
-			"hips": {}, 
-			"leftHand":{}, 
-			"rightHand": {}
-		}
 		ewbik.set_pin_count(0)
 		var index : int = 0
 		var minimum_twist = deg2rad(-0.5)
 		var minimum_twist_diff = deg2rad(0.5)
 		var maximum_twist = deg2rad(360)
-		var pin_size : int = pins.keys().size()
+		var pin_size : int = vrm_profile.keys().size()
 		for pin_i in pin_size:
 			var node_3d : Node3D = Node3D.new()
 			skeleton.add_child(node_3d, true)
-			var pin_key = pins.keys()[pin_i]
-			var node_path : NodePath = "../../../" + str(pin_key)
+			var pin_key = vrm_profile.keys()[pin_i]
+			var profile_name : String = vrm_profile[pin_key]["profile_name"]
+			if profile_name.is_empty():
+				continue
+			var node_path : NodePath = "../../../" + str(profile_name)
+			var node : Node3D = ewbik.get_node_or_null(node_path)
+			if node == null:
+				continue
+			var bone_index = vrm_profile[pin_key]["bone_index"]
+			var bone_global_pose = skeleton.get_bone_global_pose(bone_index)
+			bone_global_pose = skeleton.global_pose_to_world_transform(bone_global_pose)
+			node.global_transform = bone_global_pose
+			if not vrm_human_mapping.has(pin_key):
+				continue
 			var bone_name : StringName = vrm_human_mapping[pin_key]
 			node_3d.name = bone_name
 			var bone_id : int = skeleton.find_bone(bone_name)
