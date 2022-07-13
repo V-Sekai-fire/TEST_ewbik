@@ -69,7 +69,7 @@ var vrm_to_godot : Dictionary = {
 	"leftToes": "LeftToes",
 	"rightUpperLeg": "RightUpperLeg",
 	"rightLowerLeg": "RightLowerLeg",
-	"leftToes": "RightFoot",
+	"rightFoot": "RightFoot",
 	"rightToes": "RightToes",
 }
 
@@ -102,15 +102,23 @@ func _run():
 	ewbik.name = "EWBIK"
 	ewbik.skeleton = ewbik.get_path_to(skeleton)
 	_generate_ewbik(vrm_top_level, skeleton, ewbik)
+	var godot_to_vrm : Dictionary
+	for vrm_name in vrm_to_godot.keys():
+		godot_to_vrm[vrm_to_godot[vrm_name]] = vrm_name 
 	var profile : SkeletonProfileHumanoid = ewbik.skeleton_profile
-	for g in profile.group_size:
-		var name = profile.get_group_name(g)
-		print({"name": name, "index": g})
-		
+	var humanoid_bone_mapping : Dictionary = vrm_top_level.vrm_meta.humanoid_bone_mapping
 	for b in profile.bone_size:
-		var name = profile.get_bone_name(b)
-		print({"name": name, "index": b})
-
+		var godot_name = profile.get_bone_name(b)
+		var vrm_name : String
+		if godot_to_vrm.has(godot_name):
+			vrm_name = godot_to_vrm[godot_name]
+		var bone_index : int = -1
+		var bone_name : String
+		if humanoid_bone_mapping.has(vrm_name):
+			bone_name = humanoid_bone_mapping[vrm_name]
+			bone_index = skeleton.find_bone(bone_name)
+		print({"godot_name": godot_name, 
+			"vrm_name": vrm_name, "profile_index": b, "bone_index": bone_index, "bone_name": bone_name})
 func _generate_ewbik(vrm_top_level : Node3D, skeleton : Skeleton3D, ewbik : EWBIK):
 	var vrm_meta = vrm_top_level.get("vrm_meta")
 	var vrm_human_mapping : Dictionary = vrm_meta.get("humanoid_bone_mapping")
