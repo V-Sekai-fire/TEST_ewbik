@@ -147,7 +147,7 @@ func _generate_ewbik(vrm_top_level : Node3D, skeleton : Skeleton3D, ewbik : EWBI
 			var profile_name : String = vrm_profile[pin_key]["profile_name"]
 			if profile_name.is_empty():
 				continue
-			var node_path : NodePath = "../../../" + str(profile_name)
+			var node_path : NodePath = "../../" + str(profile_name)
 			var node : Node3D = ewbik.get_node_or_null(node_path)
 			if node == null:
 				continue
