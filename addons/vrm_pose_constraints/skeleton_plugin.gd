@@ -2,6 +2,8 @@
 extends EditorScript
 
 
+var vrm_bone_profile : SkeletonProfileHumanoid = SkeletonProfileHumanoid.new()
+
 func _lock_rotation(ewbik, constraint_i):
 	ewbik.set_kusudama_limit_cone_count(constraint_i, 1)
 	ewbik.set_kusudama_limit_cone_center(constraint_i, 0, Vector3(0, 1, 0))
@@ -11,6 +13,65 @@ func _full_rotation(ewbik, constraint_i):
 	ewbik.set_kusudama_limit_cone_count(constraint_i, 1)
 	ewbik.set_kusudama_limit_cone_center(constraint_i, 0, Vector3(0, 1, 0))
 	ewbik.set_kusudama_limit_cone_radius(constraint_i, 0, TAU)
+
+var vrm_to_godot : Dictionary = {
+	"root": "Root",
+	"hips": "Hips",
+	"spine": "Spine",
+	"chest": "Chest",
+	"upperChest": "UpperChest",
+	"neck": "Neck",
+	"head": "Head",
+	"leftEye": "LeftEye",
+	"rightEye": "RightEye",
+	"jaw": "Jaw",
+	"leftShoulder": "LeftShoulder",
+	"leftUpperArm": "LeftUpperArm",
+	"leftLowerArms": "LeftLowerArm",
+	"leftHand": "LeftHand",
+	"leftThumbProximal": "LeftThumbProximal",
+	"leftThumbIntermediate": "LeftThumbIntermediate",
+	"leftThumbDistal": "LeftThumbDistal",
+	"leftIndexProximal": "LeftIndexProximal",
+	"leftIndexIntermediate": "LeftIndexIntermediate",
+	"leftIndexDistal": "LeftIndexDistal",
+	"leftMiddleProximal": "LeftMiddleProximal",
+	"leftMiddleIntermediate": "LeftMiddleIntermediate",
+	"leftMiddleDistal": "LeftMiddleDistal",
+	"leftRingProximal": "LeftRingProximal",
+	"leftRingIntermediate": "LeftRingIntermediate",
+	"leftRingDistal": "LeftRingDistal",
+	"leftLittleProximal": "LeftLittleProximal",
+	"leftLittleIntermediate": "LeftLittleIntermediate",
+	"leftLittleDistal": "LeftLittleDistal",
+	"rightShoulder": "RightShoulder",
+	"rightUpperArm": "RightUpperArm",
+	"rightLowerArm": "RightLowerArm",
+	"rightHand": "RightHand",
+	"rightThumbProximal": "RightThumbProximal",
+	"rightThumbIntermediate": "RightThumbIntermediate",
+	"rightThumbDistal": "RightThumbDistal",
+	"rightIndexProximal": "RightIndexProximal",
+	"rightIndexIntermediate": "RightIndexIntermediate",
+	"rightIndexDistal": "RightIndexDistal",
+	"rightMiddleProximal": "RightMiddleProximal",
+	"rightMiddleIntermediate": "RightMiddleIntermediate",
+	"rightMiddleDistal": "RightMiddleDistal",
+	"rightRingProximal": "RightRingProximal",
+	"rightRingIntermediate": "RightRingIntermediate",
+	"rightRingDistal": "RightRingDistal",
+	"rightLittleProximal": "RightLittleProximal",
+	"rightLittleIntermediate": "RightLittleIntermediate",
+	"rightLittleDistal": "RightLittleDistal",
+	"leftUpperLeg": "LeftUpperLeg",
+	"leftLowerLeg": "LeftLowerLeg",
+	"leftFoot": "LeftFoot",
+	"leftToes": "LeftToes",
+	"rightUpperLeg": "RightUpperLeg",
+	"rightLowerLeg": "RightLowerLeg",
+	"leftToes": "RightFoot",
+	"rightToes": "RightToes",
+}
 
 func _run():
 	var root : Node3D = get_editor_interface().get_edited_scene_root()
@@ -41,6 +102,14 @@ func _run():
 	ewbik.name = "EWBIK"
 	ewbik.skeleton = ewbik.get_path_to(skeleton)
 	_generate_ewbik(vrm_top_level, skeleton, ewbik)
+	var profile : SkeletonProfileHumanoid = ewbik.skeleton_profile
+	for g in profile.group_size:
+		var name = profile.get_group_name(g)
+		print({"name": name, "index": g})
+		
+	for b in profile.bone_size:
+		var name = profile.get_bone_name(b)
+		print({"name": name, "index": b})
 
 func _generate_ewbik(vrm_top_level : Node3D, skeleton : Skeleton3D, ewbik : EWBIK):
 	var vrm_meta = vrm_top_level.get("vrm_meta")
