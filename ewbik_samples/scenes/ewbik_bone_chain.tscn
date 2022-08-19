@@ -1,129 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://bra1bg0dv0ev8"]
+[gd_scene load_steps=6 format=3 uid="uid://bra1bg0dv0ev8"]
 
 [ext_resource type="PackedScene" uid="uid://deuapcn1ywqqi" path="res://ewbik_samples/art/ewbik_3_bone_chain.glb" id="1_clbwx"]
 
-[sub_resource type="SkeletonModification3DEWBIK" id="SkeletonModification3DEWBIK_3xd3x"]
-budget_millisecond = 4.0
-root_bone = &"A0"
-default_damp = 0.0174533
-constraint_count = 12
-constraints/0/name = &"B3"
-constraints/0/kusudama_flip_handedness = false
-constraints/0/kusudama_twist_from = 0.0
-constraints/0/kusudama_twist_to = 2.96706
-constraints/0/kusudama_limit_cone_count = 1
-constraints/0/kusudama_limit_cone/0/center = Vector3(0, 1, 0)
-constraints/0/kusudama_limit_cone/0/radius = 3.14159
-constraints/1/name = &"B2"
-constraints/1/kusudama_flip_handedness = false
-constraints/1/kusudama_twist_from = 0.0
-constraints/1/kusudama_twist_to = 2.96706
-constraints/1/kusudama_limit_cone_count = 1
-constraints/1/kusudama_limit_cone/0/center = Vector3(0, 1, 0)
-constraints/1/kusudama_limit_cone/0/radius = 1.5708
-constraints/2/name = &"B1"
-constraints/2/kusudama_flip_handedness = false
-constraints/2/kusudama_twist_from = 0.0
-constraints/2/kusudama_twist_to = 2.96706
-constraints/2/kusudama_limit_cone_count = 1
-constraints/2/kusudama_limit_cone/0/center = Vector3(0, 1, 0)
-constraints/2/kusudama_limit_cone/0/radius = 1.5708
-constraints/3/name = &"B0"
-constraints/3/kusudama_flip_handedness = false
-constraints/3/kusudama_twist_from = 0.0
-constraints/3/kusudama_twist_to = 2.96706
-constraints/3/kusudama_limit_cone_count = 1
-constraints/3/kusudama_limit_cone/0/center = Vector3(0, 1, 0)
-constraints/3/kusudama_limit_cone/0/radius = 1.5708
-constraints/4/name = &"C3"
-constraints/4/kusudama_flip_handedness = false
-constraints/4/kusudama_twist_from = 0.0
-constraints/4/kusudama_twist_to = 0.261799
-constraints/4/kusudama_limit_cone_count = 1
-constraints/4/kusudama_limit_cone/0/center = Vector3(0, 1, 0)
-constraints/4/kusudama_limit_cone/0/radius = 1.5708
-constraints/5/name = &"C2"
-constraints/5/kusudama_flip_handedness = false
-constraints/5/kusudama_twist_from = 0.0
-constraints/5/kusudama_twist_to = 2.96706
-constraints/5/kusudama_limit_cone_count = 1
-constraints/5/kusudama_limit_cone/0/center = Vector3(0, 1, 0)
-constraints/5/kusudama_limit_cone/0/radius = 1.5708
-constraints/6/name = &"C1"
-constraints/6/kusudama_flip_handedness = false
-constraints/6/kusudama_twist_from = 0.0
-constraints/6/kusudama_twist_to = 0.261799
-constraints/6/kusudama_limit_cone_count = 1
-constraints/6/kusudama_limit_cone/0/center = Vector3(0, 1, 0)
-constraints/6/kusudama_limit_cone/0/radius = 1.5708
-constraints/7/name = &"C0"
-constraints/7/kusudama_flip_handedness = true
-constraints/7/kusudama_twist_from = 0.0
-constraints/7/kusudama_twist_to = 0.261799
-constraints/7/kusudama_limit_cone_count = 1
-constraints/7/kusudama_limit_cone/0/center = Vector3(0, 1, 0)
-constraints/7/kusudama_limit_cone/0/radius = 1.5708
-constraints/8/name = &"A3"
-constraints/8/kusudama_flip_handedness = false
-constraints/8/kusudama_twist_from = 0.0
-constraints/8/kusudama_twist_to = 2.96706
-constraints/8/kusudama_limit_cone_count = 1
-constraints/8/kusudama_limit_cone/0/center = Vector3(0, 1, 0)
-constraints/8/kusudama_limit_cone/0/radius = 1.5708
-constraints/9/name = &"A2"
-constraints/9/kusudama_flip_handedness = false
-constraints/9/kusudama_twist_from = 0.0
-constraints/9/kusudama_twist_to = 2.96706
-constraints/9/kusudama_limit_cone_count = 1
-constraints/9/kusudama_limit_cone/0/center = Vector3(0, 1, 0)
-constraints/9/kusudama_limit_cone/0/radius = 1.5708
-constraints/10/name = &"A1"
-constraints/10/kusudama_flip_handedness = false
-constraints/10/kusudama_twist_from = 0.0
-constraints/10/kusudama_twist_to = 2.96706
-constraints/10/kusudama_limit_cone_count = 1
-constraints/10/kusudama_limit_cone/0/center = Vector3(0, 1, 0)
-constraints/10/kusudama_limit_cone/0/radius = 1.5708
-constraints/11/name = &"A0"
-constraints/11/kusudama_flip_handedness = false
-constraints/11/kusudama_twist_from = 0.0
-constraints/11/kusudama_twist_to = 2.96706
-constraints/11/kusudama_limit_cone_count = 1
-constraints/11/kusudama_limit_cone/0/center = Vector3(0, 1, 0)
-constraints/11/kusudama_limit_cone/0/radius = 1.5708
-pin_count = 3
-pins/0/name = "C3"
-pins/0/target_node = NodePath("../../../C3")
-pins/0/use_node_rotation = true
-pins/0/depth_falloff = 1.0
-pins/0/priority = null
-pins/0/weight_translation = null
-pins/0/weight_x_direction = null
-pins/0/weight_y_direction = null
-pins/0/weight_z_direction = null
-pins/1/name = "B3"
-pins/1/target_node = NodePath("../../../B3")
-pins/1/use_node_rotation = true
-pins/1/depth_falloff = 1.0
-pins/1/priority = null
-pins/1/weight_translation = null
-pins/1/weight_x_direction = null
-pins/1/weight_y_direction = null
-pins/1/weight_z_direction = null
-pins/2/name = "A0"
-pins/2/target_node = NodePath("../Node3D")
-pins/2/use_node_rotation = true
-pins/2/depth_falloff = 0.0
-pins/2/priority = null
-pins/2/weight_translation = null
-pins/2/weight_x_direction = null
-pins/2/weight_y_direction = null
-pins/2/weight_z_direction = null
-
 [sub_resource type="SkeletonModificationStack3D" id="SkeletonModificationStack3D_nguf7"]
 enabled = true
-modification_count = 1
-modifications/0 = SubResource("SkeletonModification3DEWBIK_3xd3x")
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_5tvgf"]
 top_radius = 0.0
@@ -141,45 +21,46 @@ albedo_color = Color(0.184314, 0.301961, 0.576471, 1)
 [node name="ewbik_3_bone_chain" parent="." instance=ExtResource("1_clbwx")]
 
 [node name="Skeleton3D" parent="ewbik_3_bone_chain/Armature" index="0"]
-bones/0/position = Vector3(0.0496183, 0.146139, -0.0593615)
-bones/0/rotation = Quaternion(4.65661e-10, -3.20456e-10, 4.36557e-11, 1)
+bones/0/position = Vector3(0.0578831, -0.0142759, 0.0577047)
+bones/0/rotation = Quaternion(0.000312878, 9.5918e-08, -0.00021694, 1)
 bones/0/scale = Vector3(1, 1, 1)
-bones/1/position = Vector3(1.86265e-08, 0.0926459, 0)
-bones/1/rotation = Quaternion(0.26406, 0.0232236, -0.191037, 0.945113)
+bones/1/position = Vector3(-2.6416e-05, 0.0927318, 4.1388e-06)
+bones/1/rotation = Quaternion(0.120586, 0.0432042, -0.074869, 0.988932)
 bones/1/scale = Vector3(1, 1, 1)
-bones/2/position = Vector3(0.000129789, 0.109247, 1.02818e-06)
-bones/2/rotation = Quaternion(0.000344453, 0.0579124, -0.000903401, 0.998321)
+bones/2/position = Vector3(0.00012796, 0.109492, -4.88013e-06)
+bones/2/rotation = Quaternion(-0.00140892, 0.0397163, -0.000966656, 0.99921)
 bones/2/scale = Vector3(1, 1, 1)
-bones/3/position = Vector3(-5.92303e-05, 0.100844, -3.02941e-05)
-bones/3/rotation = Quaternion(-0.0515313, 0.744662, 0.0485863, 0.663673)
+bones/3/position = Vector3(-5.16921e-05, 0.101011, -2.82899e-05)
+bones/3/rotation = Quaternion(0.00214318, 0.72696, 0.000684082, 0.686676)
 bones/3/scale = Vector3(1, 1, 1)
-bones/4/position = Vector3(-2.95788e-05, 0.100692, -5.3525e-05)
-bones/4/rotation = Quaternion(0.378839, 0.00734011, 0.097044, 0.920331)
+bones/4/position = Vector3(-3.43435e-05, 0.10078, -6.27413e-05)
+bones/4/rotation = Quaternion(0.483135, -0.0313961, 0.152708, 0.861554)
 bones/4/scale = Vector3(1, 1, 1)
-bones/5/position = Vector3(1.90437e-05, 0.0989089, 2.79546e-05)
-bones/5/rotation = Quaternion(0.000285355, 0.129972, 3.57087e-05, 0.991518)
+bones/5/position = Vector3(4.16562e-05, 0.09902, 4.82202e-05)
+bones/5/rotation = Quaternion(-0.00227408, 0.144708, -0.00243904, 0.989469)
 bones/5/scale = Vector3(1, 1, 1)
-bones/6/position = Vector3(-7.98702e-05, 0.100728, -7.8246e-05)
-bones/6/rotation = Quaternion(-0.00041491, 0.744274, 0.000173106, 0.667874)
+bones/6/position = Vector3(-4.07994e-05, 0.100804, -4.16338e-05)
+bones/6/rotation = Quaternion(-0.00225596, 0.857683, 0.0108786, 0.514059)
 bones/6/scale = Vector3(1, 1, 1)
-bones/7/position = Vector3(3.84152e-05, 0.100758, 3.0756e-05)
-bones/7/rotation = Quaternion(-0.0230503, 0.931005, 0.19678, 0.306554)
+bones/7/position = Vector3(4.72516e-05, 0.100862, 3.96669e-05)
+bones/7/rotation = Quaternion(0.0545605, 0.907769, 0.198602, 0.365426)
 bones/7/scale = Vector3(1, 1, 1)
-bones/8/position = Vector3(-2.79099e-05, 0.10068, -8.98018e-05)
-bones/8/rotation = Quaternion(-0.463264, 0.111102, -0.207439, 0.854407)
+bones/8/position = Vector3(-3.57814e-05, 0.10078, -9.91523e-05)
+bones/8/rotation = Quaternion(-0.358159, 0.054059, -0.151918, 0.919631)
 bones/8/scale = Vector3(1, 1, 1)
-bones/9/position = Vector3(3.58298e-05, 0.1004, -3.57628e-07)
-bones/9/rotation = Quaternion(-0.0988553, -0.000277936, -0.0448373, 0.994091)
+bones/9/position = Vector3(3.42131e-05, 0.100463, 2.0206e-05)
+bones/9/rotation = Quaternion(-0.000312138, -0.0144635, -0.00016118, 0.999895)
 bones/9/scale = Vector3(1, 1, 1)
-bones/10/position = Vector3(2.11149e-05, 0.10066, 9.77516e-05)
-bones/10/rotation = Quaternion(0.0413682, 0.00482552, -0.00855638, 0.999096)
-bones/11/position = Vector3(3.0987e-05, 0.100486, -3.80576e-05)
-bones/11/rotation = Quaternion(0.0909056, 0.00618669, 0.400199, 0.911888)
+bones/10/position = Vector3(1.78963e-05, 0.100746, 8.80361e-05)
+bones/10/rotation = Quaternion(0.00146131, -0.144415, 0.000115194, 0.989516)
+bones/10/scale = Vector3(1, 1, 1)
+bones/11/position = Vector3(2.81259e-05, 0.10055, -5.02169e-05)
+bones/11/rotation = Quaternion(-0.0310768, 0.162181, 0.423507, 0.890715)
 bones/11/scale = Vector3(1, 1, 1)
 modification_stack = SubResource("SkeletonModificationStack3D_nguf7")
 
 [node name="B3" type="BoneAttachment3D" parent="ewbik_3_bone_chain/Armature/Skeleton3D" index="1"]
-transform = Transform3D(0.563924, 0.787989, 0.247109, -0.721737, 0.615689, -0.316265, -0.401355, 1.90735e-06, 0.915923, 0.41196, 0.604008, 0.19169)
+transform = Transform3D(0.563964, 0.787956, 0.247126, -0.72171, 0.615732, -0.316241, -0.401348, -5.03659e-06, 0.915926, 0.388875, 0.46668, 0.188869)
 bone_name = "B3"
 bone_idx = 7
 
@@ -189,7 +70,7 @@ mesh = SubResource("CylinderMesh_5tvgf")
 surface_material_override/0 = SubResource("StandardMaterial3D_2ak6d")
 
 [node name="C3" type="BoneAttachment3D" parent="ewbik_3_bone_chain/Armature/Skeleton3D" index="2"]
-transform = Transform3D(-0.677951, -0.32438, 0.659667, 0.495149, 0.461764, 0.735936, -0.543333, 0.825562, -0.152437, -0.0886943, 0.653249, 0.160849)
+transform = Transform3D(-0.677894, -0.324381, 0.659725, 0.495209, 0.461767, 0.735894, -0.543349, 0.825559, -0.152392, -0.0689304, 0.619942, 0.158202)
 bone_name = "C3"
 bone_idx = 11
 
@@ -198,11 +79,43 @@ transform = Transform3D(1, 0, 0, 0, 0.999988, 0, 0, 0, 1.00001, 0, 0.032, 0)
 mesh = SubResource("CylinderMesh_5tvgf")
 surface_material_override/0 = SubResource("StandardMaterial3D_mwrrr")
 
+[node name="EWBIK" type="EWBIK" parent="ewbik_3_bone_chain/Armature/Skeleton3D" index="3"]
+root_bone = &"A0"
+skeleton = NodePath("..")
+pin_count = 3
+pins/0/name = "B3"
+pins/0/target_node = NodePath("../../../../B3")
+pins/0/use_node_rotation = true
+pins/0/depth_falloff = 57.2958
+pins/0/priority = null
+pins/0/weight_translation = null
+pins/0/weight_x_direction = null
+pins/0/weight_y_direction = null
+pins/0/weight_z_direction = null
+pins/1/name = "C3"
+pins/1/target_node = NodePath("../../../../C3")
+pins/1/use_node_rotation = true
+pins/1/depth_falloff = 57.2958
+pins/1/priority = null
+pins/1/weight_translation = null
+pins/1/weight_x_direction = null
+pins/1/weight_y_direction = null
+pins/1/weight_z_direction = null
+pins/2/name = "A0"
+pins/2/target_node = NodePath("../../Node3D")
+pins/2/use_node_rotation = true
+pins/2/depth_falloff = 57.2958
+pins/2/priority = null
+pins/2/weight_translation = null
+pins/2/weight_x_direction = null
+pins/2/weight_y_direction = null
+pins/2/weight_z_direction = null
+
 [node name="Node3D" type="Node3D" parent="ewbik_3_bone_chain/Armature" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0496183, 0.146139, -0.0593615)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0496183, -0.063718, 0.0457617)
 
 [node name="B3" type="BoneAttachment3D" parent="."]
-transform = Transform3D(0.563924, 0.787989, 0.247111, -0.721736, 0.61569, -0.316264, -0.401357, -3.16511e-07, 0.915921, 0.424741, 0.609795, 0.196396)
+transform = Transform3D(0.563924, 0.787989, 0.247111, -0.721736, 0.61569, -0.316264, -0.401357, -3.16511e-07, 0.915921, 0.424741, 0.478217, 0.196396)
 bone_name = "B3"
 bone_idx = 7
 

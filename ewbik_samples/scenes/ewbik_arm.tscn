@@ -1,114 +1,66 @@
-[gd_scene load_steps=4 format=3 uid="uid://btxw8kww2ues2"]
+[gd_scene load_steps=3 format=3 uid="uid://btxw8kww2ues2"]
 
-[ext_resource type="PackedScene" uid="uid://d35nd14euhmox" path="res://ewbik_samples/art/ewbik_simple_test_rig.glb" id="1_ij2rj"]
-
-[sub_resource type="SkeletonModification3DEWBIK" id="SkeletonModification3DEWBIK_yh8j1"]
-iterations = 1
-max_ik_iterations = 1.0
-budget_millisecond = 1.0
-root_bone = &"Bone_01"
-default_damp = 0.872665
-constraint_count = 5
-constraints/0/name = &"Bone_02"
-constraints/0/kusudama_flip_handedness = false
-constraints/0/kusudama_twist_from = 0.0
-constraints/0/kusudama_twist_to = 6.28144
-constraints/0/kusudama_limit_cone_count = 1
-constraints/0/kusudama_limit_cone/0/center = Vector3(0, 1, 0)
-constraints/0/kusudama_limit_cone/0/radius = 3.14159
-constraints/1/name = &"Bone_03"
-constraints/1/kusudama_flip_handedness = false
-constraints/1/kusudama_twist_from = 0.0
-constraints/1/kusudama_twist_to = 6.28144
-constraints/1/kusudama_limit_cone_count = 1
-constraints/1/kusudama_limit_cone/0/center = Vector3(0, 1, 0)
-constraints/1/kusudama_limit_cone/0/radius = 3.14159
-constraints/2/name = &"Bone_04"
-constraints/2/kusudama_flip_handedness = false
-constraints/2/kusudama_twist_from = 0.0
-constraints/2/kusudama_twist_to = 3.14159
-constraints/2/kusudama_limit_cone_count = 1
-constraints/2/kusudama_limit_cone/0/center = Vector3(0, 1, 0)
-constraints/2/kusudama_limit_cone/0/radius = 1.5708
-constraints/3/name = &"Bone_05"
-constraints/3/kusudama_flip_handedness = false
-constraints/3/kusudama_twist_from = 0.0
-constraints/3/kusudama_twist_to = 6.28144
-constraints/3/kusudama_limit_cone_count = 1
-constraints/3/kusudama_limit_cone/0/center = Vector3(0, 1, 0)
-constraints/3/kusudama_limit_cone/0/radius = 3.14159
-constraints/4/name = &"Bone_01"
-constraints/4/kusudama_flip_handedness = false
-constraints/4/kusudama_twist_from = 0.0
-constraints/4/kusudama_twist_to = 6.28144
-constraints/4/kusudama_limit_cone_count = 1
-constraints/4/kusudama_limit_cone/0/center = Vector3(0, 1, 0)
-constraints/4/kusudama_limit_cone/0/radius = 3.14159
-pin_count = 2
-pins/0/name = "Bone_04"
-pins/0/target_node = NodePath("../../../04")
-pins/0/use_node_rotation = true
-pins/0/depth_falloff = 1.0
-pins/0/priority = null
-pins/0/weight_translation = null
-pins/0/weight_x_direction = null
-pins/0/weight_y_direction = null
-pins/0/weight_z_direction = null
-pins/1/name = "Bone_01"
-pins/1/target_node = NodePath("../../../Node3D")
-pins/1/use_node_rotation = true
-pins/1/depth_falloff = 0.0
-pins/1/priority = null
-pins/1/weight_translation = null
-pins/1/weight_x_direction = null
-pins/1/weight_y_direction = null
-pins/1/weight_z_direction = null
+[ext_resource type="PackedScene" uid="uid://bm78phr0npt75" path="res://ewbik_samples/art/ewbik_simple_test_rig.glb" id="1_ij2rj"]
 
 [sub_resource type="SkeletonModificationStack3D" id="SkeletonModificationStack3D_hqig5"]
 enabled = true
-modification_count = 1
-modifications/0 = SubResource("SkeletonModification3DEWBIK_yh8j1")
 
 [node name="Node3D" type="Node3D"]
 
 [node name="ewbik_simple_test_rig" parent="." instance=ExtResource("1_ij2rj")]
 
-[node name="Skeleton3D" parent="ewbik_simple_test_rig/Simple_Test_Rig_Armature" index="0"]
-bones/0/position = Vector3(0, 1.4013e-45, 2.56195e-09)
-bones/0/rotation = Quaternion(0, 0, 0, 1)
-bones/1/position = Vector3(1.16467e-21, 0.600008, 2.14693e-06)
-bones/1/rotation = Quaternion(0.422568, 0.175433, 0.349976, 0.81742)
+[node name="EWBIK" type="EWBIK" parent="ewbik_simple_test_rig/Simple_Test_Rig_Armature" index="0"]
+root_bone = &"Bone_01"
+tip_bone = &"Bone_05"
+skeleton = NodePath("../Skeleton3D")
+pin_count = 3
+pins/0/name = "Bone_04"
+pins/0/target_node = NodePath("../../../04")
+pins/0/use_node_rotation = true
+pins/0/depth_falloff = 57.2958
+pins/0/priority = null
+pins/0/weight_translation = null
+pins/0/weight_x_direction = null
+pins/0/weight_y_direction = null
+pins/0/weight_z_direction = null
+pins/1/name = "Bone_05"
+pins/1/target_node = NodePath("../../../05")
+pins/1/use_node_rotation = true
+pins/1/depth_falloff = 57.2958
+pins/1/priority = null
+pins/1/weight_translation = null
+pins/1/weight_x_direction = null
+pins/1/weight_y_direction = null
+pins/1/weight_z_direction = null
+pins/2/name = "Bone_01"
+pins/2/target_node = NodePath("..")
+pins/2/use_node_rotation = true
+pins/2/depth_falloff = 0.0
+pins/2/priority = null
+pins/2/weight_translation = null
+pins/2/weight_x_direction = null
+pins/2/weight_y_direction = null
+pins/2/weight_z_direction = null
+
+[node name="Skeleton3D" parent="ewbik_simple_test_rig/Simple_Test_Rig_Armature" index="1"]
+bones/1/position = Vector3(-6.65673e-18, 0.6, 7.10543e-15)
+bones/1/rotation = Quaternion(0.67672, -0.117348, 0.0592719, 0.724407)
 bones/1/scale = Vector3(1, 1, 1)
-bones/2/position = Vector3(0.000421286, 0.614347, -8.94666e-05)
-bones/2/rotation = Quaternion(0.264481, -0.19118, 0.13342, 0.935788)
+bones/2/position = Vector3(-8.64789e-05, 0.599995, 0.000119269)
+bones/2/rotation = Quaternion(0.000132314, -0.454636, 1.44536e-05, 0.890677)
 bones/2/scale = Vector3(1, 1, 1)
-bones/3/position = Vector3(-7.75456e-05, 0.605742, -0.000228524)
-bones/3/rotation = Quaternion(-0.0758586, 0.989371, 0.124055, 1.40258e-06)
+bones/3/position = Vector3(-1.13845e-05, 0.600169, -9.74536e-06)
+bones/3/rotation = Quaternion(-0.17291, -0.586863, 0.333054, 0.717474)
 bones/3/scale = Vector3(1, 1, 1)
-bones/4/position = Vector3(-6.95884e-05, 0.604198, -1.62125e-05)
-bones/4/rotation = Quaternion(-0.287243, -0.00102376, 0.0410071, 0.956979)
+bones/4/position = Vector3(-1.77622e-05, 0.600358, -8.76188e-06)
+bones/4/rotation = Quaternion(-0.0554703, 0.82426, 0.430366, 0.363735)
+bones/4/scale = Vector3(1, 1, 1)
 modification_stack = SubResource("SkeletonModificationStack3D_hqig5")
 
-[node name="Simple_Test_Rig" parent="ewbik_simple_test_rig/Simple_Test_Rig_Armature/Skeleton3D" index="0"]
-visible = false
+[node name="04" type="Node3D" parent="."]
+transform = Transform3D(-0.76488, 0.107364, -0.635107, -0.523185, 0.471615, 0.709789, 0.375742, 0.875214, -0.304546, -0.65623, 0.464764, 1.89902)
 
-[node name="04" type="BoneAttachment3D" parent="ewbik_simple_test_rig/Simple_Test_Rig_Armature/Skeleton3D" index="1"]
-transform = Transform3D(-0.754506, -0.320326, -0.57281, -0.409674, -0.451988, 0.792385, -0.512725, 0.832525, 0.209799, -0.46275, 0.737839, 1.06055)
-bone_name = "Bone_04"
-bone_idx = 3
-
-[node name="05" type="BoneAttachment3D" parent="ewbik_simple_test_rig/Simple_Test_Rig_Armature/Skeleton3D" index="2"]
-transform = Transform3D(-0.764925, 0.107347, -0.635112, -0.461151, -0.779667, 0.423628, -0.4497, 0.616925, 0.645889, -0.656228, 0.464764, 1.5636)
-bone_name = "Bone_05"
-bone_idx = 4
-
-[node name="04" type="BoneAttachment3D" parent="."]
-transform = Transform3D(-0.764925, 0.107347, -0.635112, -0.461151, -0.779667, 0.423628, -0.4497, 0.616925, 0.645889, -0.656228, 0.464764, 1.5636)
-bone_name = "Bone_05"
-bone_idx = 4
-use_external_skeleton = true
-external_skeleton = NodePath("../ewbik_simple_test_rig/Simple_Test_Rig_Armature/Skeleton3D")
-
-[node name="Node3D" type="Node3D" parent="."]
+[node name="05" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.35736, 1.66674)
 
 [editable path="ewbik_simple_test_rig"]

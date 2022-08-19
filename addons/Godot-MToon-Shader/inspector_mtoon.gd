@@ -133,8 +133,8 @@ func merge_single_line_properties(label: String, outer_prop: Control, inner_prop
 	new_control.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	new_hbox.add_child(new_control, true)
 	# Is it a bad idea to constrain the inspector like this?
-	new_hbox.minimum_size = Vector2(155, 20)
-	outer_prop.minimum_size = Vector2(190, 20)
+	new_hbox.custom_minimum_size = Vector2(155, 20)
+	outer_prop.custom_minimum_size = Vector2(190, 20)
 	outer_prop.add_child(inner_prop, true)
 	outer_prop.add_child(new_hbox, true)
 
@@ -173,7 +173,7 @@ func _parse_end(object: Object) -> void:
 		var parent_vbox: Control = first_property.get_parent()
 		do_unfold_section(parent_vbox.get_parent())
 		for prop in property_name_to_editor:
-			property_name_to_editor[prop].set_tooltip("shader_param/" + prop + "\n" + property_text.get(prop, ["",""])[1])
+			property_name_to_editor[prop].set_tooltip("shader_uniform/" + prop + "\n" + property_text.get(prop, ["",""])[1])
 		for param in property_headers:
 			var property_editor: Control = property_name_to_editor.get(param)
 			if property_editor != null:
@@ -225,18 +225,18 @@ func _parse_end(object: Object) -> void:
 		first_property = null
 		property_name_to_editor = {}.duplicate()
 
-func is_a_shader_param(path: String) -> bool:
-	return path.begins_with("shader_param/")
+func is_a_shader_uniform(path: String) -> bool:
+	return path.begins_with("shader_uniform/")
 
 func _parse_property(object: Object, type: int, path: String, hint: int, hint_text: String, usage: int, wide: bool) -> bool:
 	if last_tex_property != "":
 		_process_tex_property()
 		last_tex_property = ""
-	if path == "shader_param/_AlphaCutoutEnable":
+	if path == "shader_uniform/_AlphaCutoutEnable":
 		for param in property_text:
 			if len(property_text[param]) == 3:
 				continue
-			var this_type: int = typeof(object.get_shader_param(param))
+			var this_type: int = typeof(object.get_shader_uniform(param))
 			var property_editor: EditorProperty = null
 			var tooltip: String = property_text[param][1]
 			if param == "_AlphaCutoutEnable":
@@ -259,10 +259,10 @@ func _parse_property(object: Object, type: int, path: String, hint: int, hint_te
 			else:
 				property_editor = SpinInspector.new(tooltip, mins.get(param, 0.0), maxes.get(param, 1.0), steps.get(param, 0.001))
 			property_name_to_editor[param] = property_editor
-			var path_arr = PackedStringArray(["shader_param/" + param])
+			var path_arr = PackedStringArray(["shader_uniform/" + param])
 			add_property_editor_for_multiple_properties(property_text[param][0], path_arr, property_editor)
 		return true
-	elif is_a_shader_param(str(path)):
+	elif is_a_shader_uniform(str(path)):
 		var param: String = str(path).split("/")[-1]
 		if type == TYPE_OBJECT and str(hint_text).find("Texture") != -1:
 			last_tex_property = param
@@ -282,7 +282,7 @@ class MToonProperty extends EditorProperty:
 	func _make_custom_tooltip(text: String) -> Object:
 		var label: Label = Label.new()
 		label.text = text + self.tooltip
-		label.minimum_size = Vector2(200,30)
+		label.custom_minimum_size = Vector2(200,30)
 		return label
 
 	func get_tooltip_text() -> String:
@@ -322,7 +322,7 @@ class MToonProperty extends EditorProperty:
 		slider.min_value = 0.0
 		slider.max_value = 1.0
 		slider.size_flags_horizontal = SIZE_EXPAND_FILL
-		slider.minimum_size = Vector2(50.0, 20.0)
+		slider.custom_minimum_size = Vector2(50.0, 20.0)
 		slider.value_changed.connect(self._value_changed)
 
 	func emit_changed(prop : StringName, val : Variant, field : StringName = &"", changing : bool = false) -> void:
@@ -582,8 +582,8 @@ class LinearColorInspector extends MToonProperty:
 		#picker_box.add_child(color_picker2, true)
 		#add_focusable(color_picker2)
 		color_picker.edit_alpha = allow_alpha
-		color_picker.minimum_size = Vector2(40.0, 40.0)
-		#color_picker2.minimum_size = Vector2(40.0, 40.0)
+		color_picker.custom_minimum_size = Vector2(40.0, 40.0)
+		#color_picker2.custom_minimum_size = Vector2(40.0, 40.0)
 		color_picker.color_changed.connect(self._color_changed)
 
 	func _color_changed(new_color: Color) -> void:
