@@ -103,10 +103,6 @@ func _run():
 	ewbik.skeleton = ewbik.get_path_to(skeleton)
 	var vrm_profile : Dictionary
 	var humanoid_profile : Dictionary
-	_generate_ewbik(vrm_top_level, skeleton, ewbik, vrm_profile, humanoid_profile)
-
-
-func _generate_ewbik(vrm_top_level : Node3D, skeleton : Skeleton3D, ewbik : EWBIK, vrm_profile : Dictionary, humanoid_profile : Dictionary) -> void:
 	var vrm_meta = vrm_top_level.get("vrm_meta")
 	ewbik.pin_count = vrm_bone_profile.bone_size
 	for key in vrm_bone_profile.bone_size:
@@ -121,21 +117,17 @@ func _generate_ewbik(vrm_top_level : Node3D, skeleton : Skeleton3D, ewbik : EWBI
 		var profile_name : String = vrm_bone_profile.get_bone_name(key)
 		if profile_name.is_empty():
 			continue
-		var node_path : NodePath = "../../" + str(profile_name)
-		var node : Node3D = ewbik.get_node_or_null(node_path)
-		if node == null:
-			continue
+		var node_path : NodePath = str(profile_name)
 		var bone_index = skeleton.find_bone(profile_name)
-		var bone_global_pose = skeleton.get_bone_global_pose(bone_index)
-		bone_global_pose = skeleton.global_pose_to_world_transform(bone_global_pose)
-		node.global_transform = bone_global_pose
+		var bone_global_pose = skeleton.global_pose_to_world_transform(skeleton.get_bone_global_pose(bone_index))
 		node_3d.name = profile_name
-		node_3d.transform = skeleton.get_bone_global_pose(bone_index)
-		vrm_top_level.add_child(node_3d, true)
+		node_3d.transform = bone_global_pose
+		root.add_child(node_3d, true)
+		node_3d.owner = root
 		ewbik.set_pin_bone_name(key, profile_name)
 		ewbik.set_pin_nodepath(key, node_path)
 		ewbik.set_pin_use_node_rotation(key, true)
-		ewbik.set_pin_depth_falloff(key, 0)
+		ewbik.set_pin_depth_falloff(key, 1)
 	ewbik.constraint_count = 0
 	for count_i in skeleton.get_bone_count():
 		var bone_name = skeleton.get_bone_name(count_i)
@@ -181,6 +173,5 @@ func _generate_ewbik(vrm_top_level : Node3D, skeleton : Skeleton3D, ewbik : EWBI
 		elif bone_name in ["leftFoot", "rightFoot"]:
 			ewbik.set_kusudama_twist_from(constraint_i, deg2rad(-40))
 			ewbik.set_kusudama_twist_to(constraint_i, deg2rad(40))
-		else:
-			ewbik.set_kusudama_twist_from(constraint_i, deg2rad(-0.5))
-			ewbik.set_kusudama_twist_to(constraint_i, deg2rad(0.5))
+
+	

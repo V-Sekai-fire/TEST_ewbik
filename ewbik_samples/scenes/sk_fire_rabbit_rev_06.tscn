@@ -1,17 +1,5 @@
 [gd_scene load_steps=2 format=3 uid="uid://lb5loufrcng6"]
 
-[ext_resource type="PackedScene" uid="uid://dl2l5ec4vmp06" path="res://ewbik_samples/art/SK_fire_rabbit_rev_06.vrm" id="1_cs2oo"]
+[ext_resource type="PackedScene" uid="uid://c6m0vucsftrcl" path="res://ewbik_samples/art/SK_fire_rabbit_rev_06.vrm" id="1_cs2oo"]
 
 [node name="SK_fire_rabbit_rev_06" instance=ExtResource("1_cs2oo")]
-
-[node name="GeneralSkeleton" parent="." index="0"]
-bones/1/position = Vector3(-5.56848e-13, 0.917805, -3.04449e-06)
-bones/1/rotation = Quaternion(0.995437, 1.70315e-10, 1.59896e-11, 0.0954198)
-bones/1/scale = Vector3(1, 1, 1)
-
-[node name="Face" parent="GeneralSkeleton" index="0"]
-blend_shapes/Fcl_MTH_A = 0.99999
-
-[node name="EWBIK2" type="EWBIK" parent="." index="3"]
-root_bone = &"Root"
-skeleton = NodePath("../GeneralSkeleton")
