@@ -119,7 +119,7 @@ func _run():
 		skeleton.add_child(node_3d, true)
 		if profile_name.is_empty():
 			continue
-		var node_path : NodePath = str(profile_name)
+		var node_path : NodePath = "../" + str(profile_name)
 		var bone_index = skeleton.find_bone(profile_name)
 		var bone_global_pose = skeleton.global_pose_to_world_transform(skeleton.get_bone_global_pose(bone_index))
 		node_3d.name = profile_name
