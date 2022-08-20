@@ -98,8 +98,8 @@ static func _fortune_with_chains(
 				if p_ignore_unchained_bones:
 					r_rest_bones[parent_bone].override_direction = false
 					apply_centroid = false
-
-			if p_filtered_bones.has(p_skeleton.get_bone_name(i)) and apply_centroid:
+			var is_humanoid_profile_bone : bool = p_filtered_bones.has(p_skeleton.get_bone_name(i))
+			if not is_humanoid_profile_bone and apply_centroid:
 				r_rest_bones[parent_bone].children_centroid_direction = r_rest_bones[parent_bone].children_centroid_direction + p_skeleton.get_bone_rest(i).origin
 			r_rest_bones[parent_bone].children.append(i)
 
