@@ -47,7 +47,8 @@ static func _fortune_with_chains(
 	p_fixed_chains: Array,
 	p_ignore_unchained_bones: bool,
 	p_ignore_chain_tips: Array,
-	p_base_pose: Array) -> Dictionary:
+	p_base_pose: Array,
+	p_filtered_bones: Array) -> Dictionary:
 	var bone_count: int = p_skeleton.get_bone_count()
 
 	# First iterate through all the bones and create a RestBone for it with an empty centroid
@@ -98,7 +99,7 @@ static func _fortune_with_chains(
 					r_rest_bones[parent_bone].override_direction = false
 					apply_centroid = false
 
-			if apply_centroid:
+			if p_filtered_bones.has(p_skeleton.get_bone_name(i)) and apply_centroid:
 				r_rest_bones[parent_bone].children_centroid_direction = r_rest_bones[parent_bone].children_centroid_direction + p_skeleton.get_bone_rest(i).origin
 			r_rest_bones[parent_bone].children.append(i)
 
@@ -138,8 +139,8 @@ static func find_mesh_instances_for_avatar_skeleton(p_node: Node, p_skeleton: Sk
 	return p_valid_mesh_instances
 
 
-static func get_fortune_with_chain_offsets(p_skeleton: Skeleton3D, p_base_pose: Array) -> Dictionary:
-	var rest_bones: Dictionary = _fortune_with_chains(p_skeleton, {}.duplicate(), [], false, [], p_base_pose)
+static func get_fortune_with_chain_offsets(p_skeleton: Skeleton3D, p_base_pose: Array, p_filtered_bones: Array) -> Dictionary:
+	var rest_bones: Dictionary = _fortune_with_chains(p_skeleton, {}.duplicate(), [], false, [], p_base_pose, p_filtered_bones)
 
 	var offsets: Dictionary = {"base_pose_offsets":[], "bind_pose_offsets":[]}
 
@@ -151,6 +152,13 @@ static func get_fortune_with_chain_offsets(p_skeleton: Skeleton3D, p_base_pose: 
 
 
 func _run() -> void:
+	
+	var humanoid_profile : SkeletonProfileHumanoid = SkeletonProfileHumanoid.new()
+	var profile_bones : Array[String]
+	profile_bones.resize(humanoid_profile.bone_size)
+	for bone_i in humanoid_profile.bone_size:
+		profile_bones[bone_i] = humanoid_profile.get_bone_name(bone_i)
+	
 	var root : Node3D = get_editor_interface().get_edited_scene_root()
 	var queue : Array
 	queue.push_back(root)
@@ -163,7 +171,7 @@ func _run() -> void:
 			var base_pose: Array = []
 			for i in range(0, node.get_bone_count()):
 				base_pose.append(node.get_bone_rest(i))
-			var offsets: Dictionary = get_fortune_with_chain_offsets(node, base_pose)
+			var offsets: Dictionary = get_fortune_with_chain_offsets(node, base_pose, profile_bones)
 			for i in range(0, offsets["base_pose_offsets"].size()):
 				var final_pose: Transform3D = node.get_bone_rest(i) * offsets["base_pose_offsets"][i]
 				var old_scale: Vector3 = node.get_bone_pose_scale(i)
