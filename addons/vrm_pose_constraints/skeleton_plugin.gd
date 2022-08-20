@@ -97,8 +97,8 @@ func _run():
 	if ewbik != null:
 		ewbik.queue_free()
 	ewbik = EWBIK.new()
-	root.add_child(ewbik, true)
-	ewbik.owner = root
+	skeleton.add_child(ewbik, true)
+	ewbik.owner = skeleton.owner
 	ewbik.name = "EWBIK"
 	ewbik.skeleton = ewbik.get_path_to(skeleton)
 	var vrm_profile : Dictionary
@@ -112,9 +112,11 @@ func _run():
 		var minimum_twist = deg2rad(-0.5)
 		var minimum_twist_diff = deg2rad(0.5)
 		var maximum_twist = deg2rad(360)
-		var node_3d : Node3D = Node3D.new()
-		skeleton.add_child(node_3d, true)
 		var profile_name : String = vrm_bone_profile.get_bone_name(key)
+		var node_3d : Node3D = skeleton.get_node_or_null(profile_name)
+		if node_3d == null:
+			node_3d = Node3D.new()
+		skeleton.add_child(node_3d, true)
 		if profile_name.is_empty():
 			continue
 		var node_path : NodePath = str(profile_name)

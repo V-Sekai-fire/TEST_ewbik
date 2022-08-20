@@ -26,7 +26,7 @@
 # https://github.com/godot-extended-libraries/godot-fire/commit/622022d2779f9d35b586db4ee31c9cb76d0b7bc7
 
 @tool
-extends EditorScenePostImportPlugin
+extends EditorScript
 
 const NO_BONE = -1
 const VECTOR_DIRECTION = Vector3.UP
@@ -40,26 +40,6 @@ class RestBone extends RefCounted:
 	var children: Array = []
 	var override_direction: bool = true
 
-
-static func _align_vectors(a: Vector3, b: Vector3) -> Quaternion:
-	a = a.normalized()
-	b = b.normalized()
-	var angle: float = a.angle_to(b)
-	if is_zero_approx(angle):
-		return Quaternion()
-	if !is_zero_approx(a.length_squared()) and !is_zero_approx(b.length_squared()):
-		# Find the axis perpendicular to both vectors and rotate along it by the angular difference
-		var perpendicular: Vector3 = a.cross(b).normalized()
-		var angle_diff: float = a.angle_to(b)
-		if is_zero_approx(perpendicular.length_squared()):
-			perpendicular = Vector3()
-			if !is_zero_approx(a[0]) and !is_zero_approx(a[1]):
-				perpendicular = Vector3(0, 0, 1).cross(a).normalized()
-			else:
-				perpendicular = Vector3(1, 0, 0)
-		return Quaternion(perpendicular, angle_diff)
-	else:
-		return Quaternion()
 
 static func _fortune_with_chains(
 	p_skeleton: Skeleton3D,
@@ -135,7 +115,7 @@ static func _fortune_with_chains(
 	# When we rotate a bone, we also have to move all of its children in the opposite direction
 	for i in range(0, bone_count):
 		if r_rest_bones[i].override_direction:
-			r_rest_bones[i].rest_delta = _align_vectors(VECTOR_DIRECTION, r_rest_bones[i].children_centroid_direction)
+			r_rest_bones[i].rest_delta = Quaternion(VECTOR_DIRECTION, r_rest_bones[i].children_centroid_direction)
 			r_rest_bones[i].rest_local_after.basis = r_rest_bones[i].rest_local_after.basis * Basis(r_rest_bones[i].rest_delta)
 
 			# Iterate through the children and rotate them in the opposite direction.
@@ -170,9 +150,10 @@ static func get_fortune_with_chain_offsets(p_skeleton: Skeleton3D, p_base_pose: 
 	return offsets
 
 
-func _post_process(p_root: Node) -> void:
+func _run() -> void:
+	var root : Node3D = get_editor_interface().get_edited_scene_root()
 	var queue : Array
-	queue.push_back(p_root)
+	queue.push_back(root)
 	var string_builder : Array
 	while not queue.is_empty():
 		var front = queue.front()
@@ -194,7 +175,7 @@ func _post_process(p_root: Node) -> void:
 						Basis(new_rotation) * Basis(Vector3(1,0,0) * old_scale.x, Vector3(0,1,0) * old_scale.y, Vector3(0,0,1) * old_scale.z),
 						final_pose.origin))
 			# Correct the bind poses
-			var mesh_instances: Array = find_mesh_instances_for_avatar_skeleton(p_root, node, [])
+			var mesh_instances: Array = find_mesh_instances_for_avatar_skeleton(root, node, [])
 			print("bone_direction: _fix_meshes")
 			for mi in mesh_instances:
 				var skin: Skin = mi.get_skin();
@@ -225,5 +206,4 @@ func _post_process(p_root: Node) -> void:
 		for i in child_count:
 			queue.push_back(node.get_child(i))
 		queue.pop_front()
-	return p_root
 

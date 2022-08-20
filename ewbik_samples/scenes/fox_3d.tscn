@@ -11,30 +11,23 @@ enabled = true
 
 [node name="Skeleton3D" parent="Fox/root" index="0"]
 bones/1/rotation = Quaternion(-0.274976, 0, 0, 0.961451)
-bones/2/scale = Vector3(1, 1, 1)
 bones/3/rotation = Quaternion(9.80752e-07, 6.32555e-06, -0.852017, 0.523514)
-bones/3/scale = Vector3(1, 1, 1)
 bones/4/rotation = Quaternion(-3.42224e-06, -3.54357e-06, -0.0503512, 0.998732)
-bones/4/scale = Vector3(1, 1, 1)
 bones/7/rotation = Quaternion(0.000413433, 0.000501401, -0.662993, 0.748625)
 bones/8/rotation = Quaternion(0, 0, 0.0333561, 0.999444)
-bones/8/scale = Vector3(1, 1, 1)
 bones/9/rotation = Quaternion(0.00791281, -0.0119781, 0.460562, 0.887511)
-bones/10/scale = Vector3(1, 1, 1)
 bones/12/rotation = Quaternion(-0.014138, 0.0164117, 0.460076, 0.887616)
-bones/12/scale = Vector3(1, 1, 1)
 bones/13/rotation = Quaternion(5.30177e-06, -3.58688e-06, 0.837099, 0.547052)
 bones/15/rotation = Quaternion(0, 0, -0.0538328, 0.99855)
 bones/16/rotation = Quaternion(0.00016226, -7.05107e-05, 0.989829, 0.142265)
-bones/16/scale = Vector3(1, 1, 1)
 bones/17/rotation = Quaternion(0, 0, -0.368044, 0.929808)
 bones/18/rotation = Quaternion(-2.45615e-11, 0.000248411, 0.458484, 0.888703)
 bones/20/rotation = Quaternion(3.2892e-06, -5.49141e-06, 0.989862, 0.142032)
-bones/20/scale = Vector3(1, 1, 1)
 bones/21/rotation = Quaternion(0, 0, -0.368044, 0.929808)
-bones/21/scale = Vector3(1, 1, 1)
 bones/22/rotation = Quaternion(0, -0.000153455, 0.457909, 0.888999)
 modification_stack = SubResource("SkeletonModificationStack3D_yghlv")
+
+[node name="EWBIK" type="EWBIK" parent="Fox/root/Skeleton3D" index="1"]
 
 [node name="LeftHand" type="BoneAttachment3D" parent="."]
 transform = Transform3D(0.0427082, 0.00805286, -0.999055, -0.834266, -0.549902, -0.0400962, -0.549706, 0.83519, -0.0167672, 0.0694305, 0.066946, 0.178388)
